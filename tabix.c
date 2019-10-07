@@ -347,7 +347,7 @@ int reheader_file(const char *fname, const char *header, int ftype, tbx_conf_t *
 static int usage(FILE *fp, int status)
 {
     fprintf(fp, "\n");
-    fprintf(fp, "Version: %s\n", hts_version());
+    fprintf(fp, "Version: %s gmi2\n", hts_version());
     fprintf(fp, "Usage:   tabix [OPTIONS] [FILE] [REGION [...]]\n");
     fprintf(fp, "\n");
     fprintf(fp, "Indexing Options:\n");

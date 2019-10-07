@@ -2099,7 +2099,8 @@ int bgzf_getline(BGZF *fp, int delim, kstring_t *str)
     do {
         if (fp->block_offset >= fp->block_length) {
             int bgzf_read_block_ret = bgzf_read_block(fp);
-            if (bgzf_read_block_ret == -2) { 
+            if (bgzf_read_block_ret < 0) { 
+                hts_log_error("bgzf_read_block returned error %d", bgzf_read_block_ret);
                 hts_log_error("bgzf_read_block returned error %s", strerror(fp->fp->has_errno));
                 exit(2);
             }
