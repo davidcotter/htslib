@@ -340,7 +340,11 @@ static void bcf_sr_destroy1(bcf_sr_t *reader)
     if ( reader->tbx_idx ) tbx_destroy(reader->tbx_idx);
     if ( reader->bcf_idx ) hts_idx_destroy(reader->bcf_idx);
     bcf_hdr_destroy(reader->header);
-    hts_close(reader->file);
+    int hts_status = hts_close(reader->file);
+    if (hts_status) {
+        hts_log_error("hts_close returned non-zero status %d\n", hts_status);
+        exit(1);
+    }
     if ( reader->itr ) tbx_itr_destroy(reader->itr);
     int j;
     for (j=0; j<reader->mbuffer; j++)
